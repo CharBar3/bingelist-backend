@@ -1,4 +1,4 @@
-const expreess = require ('express');
+const express = require ('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
@@ -6,7 +6,7 @@ const morgan = require('morgan');
 //--------------------------------------
 const app = express();
 
-require('doteenv').config();
+require('dotenv').config();
 
 //--------------------------------------
 
