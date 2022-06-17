@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const TvShow = require('./models/tvShowSchema')
 const Routes = require('./controllers/routeControl');
+const testRoute = require('./controllers/testRoutes')
 const admin = require('firebase-admin')
 
 //--------------------------------------
@@ -35,32 +36,32 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 // 👆 this creates req.body from incoming JSON request bodies
-app.use('/bingelist', Routes);
+app.use('/bingelist', testRoute);
 
 // authorization middleware
-app.use( async (req, res, next) => {
-    const token = req.get('Authorization')
-    if (token) {
-        try {
-            const user = await admin.auth().verifyIdToken(token.replace('Bearer ', ''))
-        console.log(user)
-        req.user = user;
-        } catch (error) {
-            req.user = null;
-        }
-    } else {
-        req.user = null;
-    }
-    next();
-})
+// app.use( async (req, res, next) => {
+//     const token = req.get('Authorization')
+//     if (token) {
+//         try {
+//             const user = await admin.auth().verifyIdToken(token.replace('Bearer ', ''))
+//         console.log(user)
+//         req.user = user;
+//         } catch (error) {
+//             req.user = null;
+//         }
+//     } else {
+//         req.user = null;
+//     }
+//     next();
+// })
 
-// lets you know if you're not logged in when making requests
-function isAuthenticated(req, res, next) {
-    if (!req.user) return res.status(401).json({message: 'you must be logged in'})
-    else {
-        return next();
-    }
-}
+// // lets you know if you're not logged in when making requests
+// function isAuthenticated(req, res, next) {
+//     if (!req.user) return res.status(401).json({message: 'you must be logged in'})
+//     else {
+//         return next();
+//     }
+// }
 
 // ==========
 // SEED ROUTE
