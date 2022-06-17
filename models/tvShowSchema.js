@@ -20,6 +20,8 @@ const Schema = mongoose.Schema;
 const tvShowSchema = new Schema ({
     showTitle: String,
     userRating: Number,
+    showBackdrop: String,
+    showPoster: String,
     seasons: [{
         episodes: [{
             episodeNumber: Number,
