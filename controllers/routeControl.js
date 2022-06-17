@@ -55,7 +55,7 @@ router.get('/', async (req, res) => {
 //DELETE--------------------------------
 router.delete('/:id', async (req, res) => {
     try {
-        res.json(await tvData.findByIdAndDelete(req.params.id));
+        res.json(await tvShowSchema.findByIdAndDelete(req.params.id));
     } catch (error) {
         console.log('error: ', error);
         res.json({error: 'something went wrong - check console'});
@@ -64,7 +64,7 @@ router.delete('/:id', async (req, res) => {
 // UPDATE--------------------------------
 router.put('/:id', async (req, res) => {
     try {
-        res.json(await tvData.findByIdAndUpdate(req.params.id, req.body, { new: true } ));
+        res.json(await tvShowSchema.findByIdAndUpdate(req.params.id, req.body, { new: true } ));
                                             // Just in case you forgot what ^^^ it sends back the updated version so we aren't
                                             ///stuck with the old one.
 
@@ -78,8 +78,8 @@ router.put('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         /// need this to add google id to the body when adding a bingelist
-        req.body.googleID = req.user.uid
-        res.json(await tvData.create(req.body));
+        // req.body.googleID = req.user.uid
+        res.json(await tvShowSchema.create(req.body));
     } catch (error) {
         console.log('error: ', error);
         res.json({error: 'something went wrong - check console'});
