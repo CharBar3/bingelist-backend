@@ -2,7 +2,7 @@ const express = require ('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
-const userSchema = require('./userSchema')
+const tvShowSchema = require('./models/tvShowSchema')
 const Routes = require('./controllers/routeControl');
 const admin = require('firebase-admin')
 
@@ -28,14 +28,14 @@ mongoose.connection
 .on('connected', () => console.log('Connected to MongoDB'))
 .on('error', (err) => console.log('Error with MongoDB: ' + err.message))
 
-const tvData = mongoose.model('tvData', userSchema);
+// const tvData = mongoose.model('tvData', tvShowSchema);
 
 //MIDDLEWARE----------------------------
 app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 // 👆 this creates req.body from incoming JSON request bodies
-app.use('/home', Routes);
+app.use('/bingelist', Routes);
 
 // authorization middleware
 app.use( async (req, res, next) => {
@@ -61,6 +61,10 @@ function isAuthenticated(req, res, next) {
         return next();
     }
 }
+
+app.get('/', (req, res) => {
+    res.redirect('/bingelist')
+})
 
 
 app.listen(PORT, () => {

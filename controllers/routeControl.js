@@ -1,6 +1,6 @@
 const express = require ('express');
 const { app } = require('firebase-admin');
-const userSchema = require('../userSchema');
+const tvShow = require('../models/tvShowSchema');
 
 const router = express.Router();
 
@@ -34,18 +34,19 @@ function isAuthenticated(req, res, next) {
 // })
 
 //ROUTES--------------------------------
-router.get('/', (req, res) => {
-    res.send(" My names not RIIIIIIIIIIIICK!” - Patrick ")
-    //i enjoy being me when I can
-})
+// router.get('/', (req, res) => {
+//     res.send(" controller home ")
+    //i enjoy being me when I can XD (sorry to update this I should have left it CTB3 )
+// })
 
 //INDEX--------------------------------
-router.get('/home', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         // grabs google id
-        const googleID = req.user.uid
+        // const googleID = req.user.uid
         // grabs all data related to google id {googleID}
-        res.json(await tvData.find({googleID}));
+        // res.json(await tvShow.find({googleID}));
+        res.json(await tvShow.find({}));
     } catch (error) {
         console.log('error: ', error);
         res.json({error: 'somethings wrong go check the console'})
@@ -53,18 +54,18 @@ router.get('/home', async (req, res) => {
 });
 
 //DELETE--------------------------------
-router.delete('/home/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
-        res.json(await tvData.findByIdAndDelete(req.params.id));
+        res.json(await tvShow.findByIdAndDelete(req.params.id));
     } catch (error) {
         console.log('error: ', error);
         res.json({error: 'something went wrong - check console'});
     }
 });
 // UPDATE--------------------------------
-router.put('/home/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
     try {
-        res.json(await tvData.findByIdAndUpdate(req.params.id, req.body, { new: true } ));
+        res.json(await tvShow.findByIdAndUpdate(req.params.id, req.body, { new: true } ));
                                             // Just in case you forgot what ^^^ it sends back the updated version so we aren't
                                             ///stuck with the old one.
 
@@ -75,11 +76,11 @@ router.put('/home/:id', async (req, res) => {
 });
 
 //CREATE--------------------------------
-router.post('/home', isAuthenticated, async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         /// need this to add google id to the body when adding a bingelist
-        req.body.googleID = req.user.uid
-        res.json(await tvData.create(req.body));
+        // req.body.googleID = req.user.uid
+        res.json(await tvShow.create(req.body));
     } catch (error) {
         console.log('error: ', error);
         res.json({error: 'something went wrong - check console'});
