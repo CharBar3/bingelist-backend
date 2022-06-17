@@ -1,6 +1,6 @@
 const express = require ('express');
 const { app } = require('firebase-admin');
-const userSchema = require('../userSchema');
+const tvShowSchema = require('../models/tvShowSchema');
 
 const router = express.Router();
 
@@ -35,12 +35,12 @@ function isAuthenticated(req, res, next) {
 
 //ROUTES--------------------------------
 router.get('/', (req, res) => {
-    res.send(" My names not RIIIIIIIIIIIICK!” - Patrick ")
+    res.send(" controller home ")
     //i enjoy being me when I can
 })
 
 //INDEX--------------------------------
-router.get('/home', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         // grabs google id
         const googleID = req.user.uid
@@ -53,7 +53,7 @@ router.get('/home', async (req, res) => {
 });
 
 //DELETE--------------------------------
-router.delete('/home/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
         res.json(await tvData.findByIdAndDelete(req.params.id));
     } catch (error) {
@@ -62,7 +62,7 @@ router.delete('/home/:id', async (req, res) => {
     }
 });
 // UPDATE--------------------------------
-router.put('/home/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
     try {
         res.json(await tvData.findByIdAndUpdate(req.params.id, req.body, { new: true } ));
                                             // Just in case you forgot what ^^^ it sends back the updated version so we aren't
@@ -75,7 +75,7 @@ router.put('/home/:id', async (req, res) => {
 });
 
 //CREATE--------------------------------
-router.post('/home', isAuthenticated, async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         /// need this to add google id to the body when adding a bingelist
         req.body.googleID = req.user.uid
