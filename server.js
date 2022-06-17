@@ -2,7 +2,7 @@ const express = require ('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
-const tvShowSchema = require('./models/tvShowSchema')
+const TvShow = require('./models/tvShowSchema')
 const Routes = require('./controllers/routeControl');
 const admin = require('firebase-admin')
 
@@ -62,6 +62,16 @@ function isAuthenticated(req, res, next) {
     }
 }
 
+// ==========
+// SEED ROUTE
+// ==========
+const seedData = require('./seedData')
+app.get('/seed', (req, res) => {
+    TvShow.deleteMany({}, (error, allTVShows) => {})
+    TvShow.create(seedData, (error, data) => {
+        res.redirect('/bingelist')
+    })
+})
 app.get('/', (req, res) => {
     res.redirect('/bingelist')
 })

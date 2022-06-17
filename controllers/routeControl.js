@@ -35,8 +35,8 @@ function isAuthenticated(req, res, next) {
 
 //ROUTES--------------------------------
 // router.get('/', (req, res) => {
-//     res.send(" controller home ")
-    //i enjoy being me when I can XD (sorry to update this I should have left it CTB3 )
+//     res.send(" My names not RIIIIIIIIIIIICK!” - Patrick ")
+    //i enjoy being me when I can
 // })
 
 //INDEX--------------------------------
