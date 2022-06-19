@@ -1,8 +1,11 @@
 const express = require ('express');
-const { app } = require('firebase-admin');
+const admin = require('firebase-admin')
 const tvShow = require('../models/tvShowSchema');
-
 const router = express.Router();
+
+admin.initializeApp({
+    credential: admin.credential.cert(require('../firebase-service-key.json'))
+  });
 
 router.use( async (req, res, next) => {
     const token = req.get('Authorization')
@@ -68,8 +71,9 @@ router.put('/:id', isAuthenticated, async (req, res) => {
 //CREATE--------------------------------
 router.post('/', isAuthenticated, async (req, res) => {
     try {
-        /// need this to add google id to the body when adding a bingelist
-        //req.body.googleID = req.user.uid
+        // need this to add google id to the body when adding a bingelist
+        req.body.googleID = req.user.uid
+        console.log(req.body)
         res.json(await tvShow.create(req.body));
     } catch (error) {
         console.log('error: ', error);

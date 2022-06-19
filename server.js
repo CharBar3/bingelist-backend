@@ -5,16 +5,16 @@ const morgan = require('morgan');
 const TvShow = require('./models/tvShowSchema')
 const Routes = require('./controllers/routeControl');
 const testRoute = require('./controllers/testRoutes')
-const admin = require('firebase-admin')
+// const admin = require('firebase-admin')
 
 //--------------------------------------
 const app = express();
 
 require('dotenv').config();
 
-admin.initializeApp({
-  credential: admin.credential.cert(require('./firebase-service-key.json'))
-});
+// admin.initializeApp({
+//   credential: admin.credential.cert(require('./firebase-service-key.json'))
+// });
 
 
 //--------------------------------------
@@ -38,10 +38,11 @@ app.use(express.json());
 // 👆 this creates req.body from incoming JSON request bodies
 app.use('/bingelist', testRoute);
 
-// authorization middleware
+// // authorization middleware
 // app.use( async (req, res, next) => {
 //     const token = req.get('Authorization')
 //     if (token) {
+//         console.log(token)
 //         try {
 //             const user = await admin.auth().verifyIdToken(token.replace('Bearer ', ''))
 //         console.log(user)
