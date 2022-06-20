@@ -36,7 +36,7 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 // 👆 this creates req.body from incoming JSON request bodies
-app.use('/bingelist', testRoute);
+app.use('/bingelist', Routes);
 
 // // authorization middleware
 // app.use( async (req, res, next) => {
