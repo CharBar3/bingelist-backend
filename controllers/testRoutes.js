@@ -47,7 +47,7 @@ router.get('/', isAuthenticated, async (req, res) => {
 });
 
 //DELETE--------------------------------
-router.delete('/:id',isAuthenticated, async (req, res) => {
+router.delete('/:id', isAuthenticated, async (req, res) => {
     try {
         res.json(await tvShow.findByIdAndDelete(req.params.id));
     } catch (error) {
@@ -73,7 +73,6 @@ router.post('/', isAuthenticated, async (req, res) => {
     try {
         // need this to add google id to the body when adding a bingelist
         req.body.googleID = req.user.uid
-        console.log(req.body)
         res.json(await tvShow.create(req.body));
     } catch (error) {
         console.log('error: ', error);
