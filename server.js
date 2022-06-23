@@ -67,13 +67,13 @@ app.use('/bingelist', testRoute);
 // ==========
 // SEED ROUTE
 // ==========
-const seedData = require('./seedData')
-app.get('/seed', (req, res) => {
-    TvShow.deleteMany({}, (error, allTVShows) => {})
-    TvShow.create(seedData, (error, data) => {
-        res.redirect('/bingelist')
-    })
-})
+// const seedData = require('./seedData')
+// app.get('/seed', (req, res) => {
+//     TvShow.deleteMany({}, (error, allTVShows) => {})
+//     TvShow.create(seedData, (error, data) => {
+//         res.redirect('/bingelist')
+//     })
+// })
 app.get('/', (req, res) => {
     res.redirect('/bingelist')
 })
