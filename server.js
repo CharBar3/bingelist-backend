@@ -19,7 +19,7 @@ require('dotenv').config();
 
 //--------------------------------------
 
-const { PORT = 4000, MONGODB_URL} = process.env;
+const { PORT, MONGODB_URL} = process.env;
 
 //Connect to mongoDB
 mongoose.connect(MONGODB_URL);
