@@ -1,11 +1,22 @@
 const express = require ('express');
-const admin = require('firebase-admin')
+const admin = require('firebase-admin');
 const tvShow = require('../models/tvShowSchema');
 const router = express.Router();
 
+// admin.initializeApp({
+//     credential: admin.credential.cert(require('../firebase-service-key.json'))
+//   });
+
 admin.initializeApp({
-    credential: admin.credential.cert(require('../firebase-service-key.json'))
-  });
+    credential: admin.credential.cert({
+        project_id: process.env.FIREBASE_PROJECT_ID,
+        private_key: process.env.FIREBASE_PRIVATE_KEY,
+        client_email: process.env.FIREBASE_CLIENT_EMAIL,
+        token_uri: process.env.FIREBASE_TOKEN_URI
+    })
+})
+
+
 
 router.use( async (req, res, next) => {
     const token = req.get('Authorization')
