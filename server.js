@@ -79,6 +79,6 @@ app.get('/', (req, res) => {
 })
 
 
-app.listen(PORT, () => {
+app.listen(PORT || 4000, () => {
     console.log(`Port: ${PORT} is now active`);
 });
