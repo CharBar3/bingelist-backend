@@ -13,7 +13,8 @@ admin.initializeApp({
         private_key: process.env.FIREBASE_PRIVATE_KEY,
         client_email: process.env.FIREBASE_CLIENT_EMAIL,
         token_uri: process.env.FIREBASE_TOKEN_URI
-    })
+    }),
+    databaseURL: "https://binge-list-project.herokuapp.com/",
 })
 
 
