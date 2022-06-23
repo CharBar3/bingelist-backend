@@ -2,6 +2,7 @@ const express = require ('express');
 const admin = require('firebase-admin');
 const tvShow = require('../models/tvShowSchema');
 const router = express.Router();
+require('dotenv').config();
 
 // admin.initializeApp({
 //     credential: admin.credential.cert(require('../firebase-service-key.json'))
@@ -10,6 +11,7 @@ const router = express.Router();
 admin.initializeApp({
     credential: admin.credential.cert({
         project_id: process.env.FIREBASE_PROJECT_ID,
+        // private_key: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n"),
         private_key: process.env.FIREBASE_PRIVATE_KEY,
         client_email: process.env.FIREBASE_CLIENT_EMAIL,
         token_uri: process.env.FIREBASE_TOKEN_URI
@@ -91,7 +93,6 @@ router.post('/', isAuthenticated, async (req, res) => {
         res.json({error: 'something went wrong - check console'});
     }
 });
-
 
 
 module.exports = router;
