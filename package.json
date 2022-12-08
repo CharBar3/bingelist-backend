@@ -14,9 +14,7 @@
   "name": "bingelist-backend",
   "version": "1.0.0",
   "main": "server.js",
-  "engines": {
-    "node": "14.x"
-  },
+
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CharBar3/bingelist-backend.git"
