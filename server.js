@@ -14,6 +14,8 @@ require("dotenv").config();
 
 //--------------------------------------
 
+// Adding comment
+
 const { PORT, MONGODB_URL } = process.env;
 
 //Connect to mongoDB
